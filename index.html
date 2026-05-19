@@ -34,9 +34,6 @@
             <a class="btn" href="https://arxiv.org/abs/2603.09173" id="arxiv-btn">
                 <i class="fas fa-file-alt"></i> arXiv
             </a>
-            <a class="btn" href="Encoder_free_3D.pdf">
-                <i class="fas fa-file-pdf"></i> PDF
-            </a>
             <a class="btn" href="https://github.com/snehaputul/SAGE3D">
                 <i class="fab fa-github"></i> Code
             </a>
@@ -47,7 +44,7 @@
 <section class="section">
     <div class="container">
         <figure class="teaser">
-            <img src="img/teaser.pdf" alt="SAGE teaser: encoder-free 3D MLLM architecture" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+            <img src="img/teaser.png" alt="SAGE teaser: encoder-free 3D MLLM architecture" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
             <div class="placeholder" style="display:none;">
                 <p><i class="fas fa-image"></i> Add <code>img/teaser.png</code> to show the architecture / example conversation figure here.</p>
             </div>
@@ -78,9 +75,6 @@
         <h2>Key Contributions</h2>
         <ul class="contributions">
             <li>
-                <strong>First end-to-end 3D MLLM.</strong> SAGE eliminates the need for pre-trained 3D encoders by introducing a lightweight, trainable tokenizer that projects raw point clouds directly into the LLM's input space.
-            </li>
-            <li>
                 <strong>Point cloud as a foreign language.</strong> A novel 3D tokenizer combines Farthest Point Sampling, K-nearest-neighbour grouping, and vector quantization with a learnable codebook — treating discrete 3D tokens as an extension of the LLM's vocabulary.
             </li>
             <li>
@@ -106,7 +100,7 @@
         </ol>
 
         <figure>
-            <img src="img/architecture.pdf" alt="SAGE architecture" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+            <img src="img/architecture.png" alt="SAGE architecture" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
             <div class="placeholder" style="display:none;">
                 <p><i class="fas fa-image"></i> Add <code>img/architecture.png</code> — the architecture figure (Figure 2 from the paper).</p>
             </div>
@@ -121,7 +115,7 @@
         </ol>
 
         <figure>
-            <img src="img/training.pdf" alt="Three-stage training pipeline" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+            <img src="img/training.png" alt="Three-stage training pipeline" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
             <div class="placeholder" style="display:none;">
                 <p><i class="fas fa-image"></i> Add <code>img/training.png</code> — the three-stage training pipeline figure (Figure 3).</p>
             </div>
@@ -145,7 +139,7 @@
         </p>
 
         <figure>
-            <img src="img/results.png" alt="Quantitative results" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+            <img src="img/result.png" alt="Quantitative results" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
             <div class="placeholder" style="display:none;">
                 <p><i class="fas fa-image"></i> Add <code>img/results.png</code> — results table or qualitative examples.</p>
             </div>
