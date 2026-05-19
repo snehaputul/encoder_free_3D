@@ -61,8 +61,8 @@ a:hover {
 .hero .subtitle {
     font-family: 'Google Sans', 'Noto Sans', sans-serif;
     font-size: 1.15em;
-    font-weight: 500;
-    color: var(--muted);
+    font-weight: 600;
+    color: #c0392b;
     margin: 0 0 28px;
 }
 
