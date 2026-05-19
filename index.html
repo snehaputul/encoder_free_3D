@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAGE: Point Cloud as a Foreign Language for Multi-modal Large Language Model</title>
+    <meta name="description" content="SAGE is the first end-to-end 3D Multi-modal Large Language Model that directly processes raw point clouds without relying on a pre-trained 3D encoder.">
+    <meta property="og:title" content="SAGE: Point Cloud as a Foreign Language for Multi-modal Large Language Model">
+    <meta property="og:description" content="The first end-to-end 3D MLLM that treats point clouds as a foreign language, without any pre-trained 3D encoder.">
+    <meta property="og:type" content="website">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Noto+Sans:wght@400;500;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<section class="hero">
+    <div class="container">
+        <h1 class="title">Point Cloud as a Foreign Language for Multi-modal Large Language Model</h1>
+        <h2 class="subtitle">SAGE: Spatial-Aware GEnerative Model for End-to-End 3D Understanding</h2>
+
+        <div class="authors">
+            <span><a href="https://snehaputul.github.io/">Sneha Paul</a></span>
+            <span><a href="#">Zachary Patterson</a></span>
+            <span><a href="#">Nizar Bouguila</a></span>
+        </div>
+        <div class="affiliations">
+            Concordia University, Canada
+        </div>
+
+        <div class="buttons">
+            <a class="btn" href="#" id="arxiv-btn">
+                <i class="fas fa-file-alt"></i> arXiv
+            </a>
+            <a class="btn" href="Encoder_free_3D.pdf">
+                <i class="fas fa-file-pdf"></i> PDF
+            </a>
+            <a class="btn" href="https://github.com/snehaputul/SAGE3D">
+                <i class="fab fa-github"></i> Code
+            </a>
+            <a class="btn" href="#bibtex">
+                <i class="fas fa-quote-right"></i> BibTeX
+            </a>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <figure class="teaser">
+            <img src="img/teaser.png" alt="SAGE teaser: encoder-free 3D MLLM architecture" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+            <div class="placeholder" style="display:none;">
+                <p><i class="fas fa-image"></i> Add <code>img/teaser.png</code> to show the architecture / example conversation figure here.</p>
+            </div>
+            <figcaption>
+                <strong>Figure 1.</strong> Our proposed encoder-free 3D Multimodal Large Language Model efficiently captures 3D information from point clouds without relying on any pretrained 3D encoder.
+            </figcaption>
+        </figure>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <h2>Abstract</h2>
+        <p>
+            Multi-modal large language models (MLLMs) have shown remarkable progress in integrating visual and linguistic understanding. Recent efforts have extended these capabilities to 3D understanding through encoder-based architectures that rely on pre-trained 3D encoders to extract geometric features. However, such approaches suffer from <strong>semantic misalignment</strong> between geometric and linguistic spaces, <strong>resolution sensitivity</strong>, and substantial <strong>computational overhead</strong>.
+        </p>
+        <p>
+            In this work, we present <strong>SAGE</strong>, the first end-to-end 3D MLLM that directly processes raw point clouds without relying on a pre-trained 3D encoder. Our approach introduces a lightweight 3D tokenizer that combines geometric sampling and neighbourhood aggregation with vector quantization to convert point clouds into discrete tokens — treating 3D data as a foreign language that naturally extends the LLM's vocabulary.
+        </p>
+        <p>
+            Furthermore, to enhance the model's reasoning capability on complex 3D tasks, we propose a preference optimization training strategy with a semantic alignment–based reward, specifically designed for open-ended 3D question answering where responses are descriptive. Extensive experiments across diverse 3D understanding benchmarks demonstrate that our end-to-end approach outperforms existing encoder-based methods while offering significant advantages in computational efficiency, generalization across LLM backbones, and robustness to input resolution variations.
+        </p>
+    </div>
+</section>
+
+<section class="section section--alt">
+    <div class="container">
+        <h2>Key Contributions</h2>
+        <ul class="contributions">
+            <li>
+                <strong>First end-to-end 3D MLLM.</strong> SAGE eliminates the need for pre-trained 3D encoders by introducing a lightweight, trainable tokenizer that projects raw point clouds directly into the LLM's input space.
+            </li>
+            <li>
+                <strong>Point cloud as a foreign language.</strong> A novel 3D tokenizer combines Farthest Point Sampling, K-nearest-neighbour grouping, and vector quantization with a learnable codebook — treating discrete 3D tokens as an extension of the LLM's vocabulary.
+            </li>
+            <li>
+                <strong>Preference optimization with semantic-alignment reward.</strong> An RL-based training strategy that replaces correctness-based rewards (used in GRPO for verifiable tasks) with a semantic alignment reward for open-ended 3D question answering.
+            </li>
+            <li>
+                <strong>Strong empirical results.</strong> Outperforms encoder-based 3D MLLMs across diverse 3D understanding benchmarks, while offering greater computational efficiency, robustness to varying input resolutions, and generalization across different LLM backbones.
+            </li>
+        </ul>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <h2>Method</h2>
+        <p>
+            SAGE treats a point cloud as a foreign language. A lightweight, trainable tokenizer projects raw point clouds into the LLM's input space via three steps:
+        </p>
+        <ol>
+            <li><strong>Geometric sampling and grouping.</strong> Farthest Point Sampling selects representative centres; K-nearest neighbours form local sub-clouds; a local geometry aggregation module produces spatially-contextualized features.</li>
+            <li><strong>Projection to LLM space.</strong> A learnable projection matrix maps geometric features into the LLM's embedding space.</li>
+            <li><strong>Vector quantization.</strong> A learnable codebook discretizes the projected features into a finite vocabulary of 3D tokens — extending the LLM's tokenizer to the 3D domain.</li>
+        </ol>
+
+        <figure>
+            <img src="img/architecture.png" alt="SAGE architecture" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+            <div class="placeholder" style="display:none;">
+                <p><i class="fas fa-image"></i> Add <code>img/architecture.png</code> — the architecture figure (Figure 2 from the paper).</p>
+            </div>
+            <figcaption><strong>Figure 2.</strong> Architecture of the proposed encoder-free 3D Multimodal Large Language Model.</figcaption>
+        </figure>
+
+        <h3>Three-Stage Training</h3>
+        <ol>
+            <li><strong>Stage 1 — 3D tokenizer warm-up.</strong> The tokenizer learns to produce meaningful discrete 3D tokens.</li>
+            <li><strong>Stage 2 — Instruction tuning.</strong> The full model is trained on 3D instruction-following data.</li>
+            <li><strong>Stage 3 — GRPO-based tuning.</strong> Preference optimization with a semantic-alignment reward enhances complex 3D reasoning.</li>
+        </ol>
+
+        <figure>
+            <img src="img/training.png" alt="Three-stage training pipeline" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+            <div class="placeholder" style="display:none;">
+                <p><i class="fas fa-image"></i> Add <code>img/training.png</code> — the three-stage training pipeline figure (Figure 3).</p>
+            </div>
+            <figcaption><strong>Figure 3.</strong> Three-stage training pipeline.</figcaption>
+        </figure>
+    </div>
+</section>
+
+<section class="section section--alt">
+    <div class="container">
+        <h2>Results</h2>
+        <p>
+            SAGE is evaluated across diverse 3D understanding benchmarks including captioning and question answering. We report two variants:
+        </p>
+        <ul>
+            <li><strong>SAGE</strong> — the full model with preference optimization (Stage 3).</li>
+            <li><strong>SAGE*</strong> — the variant without preference optimization, trained under the standard two-stage protocol.</li>
+        </ul>
+        <p>
+            Both variants outperform existing encoder-based 3D MLLMs while offering substantial efficiency gains. See the paper for full quantitative comparisons.
+        </p>
+
+        <figure>
+            <img src="img/results.png" alt="Quantitative results" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+            <div class="placeholder" style="display:none;">
+                <p><i class="fas fa-image"></i> Add <code>img/results.png</code> — results table or qualitative examples.</p>
+            </div>
+        </figure>
+    </div>
+</section>
+
+<section class="section" id="bibtex">
+    <div class="container">
+        <h2>BibTeX</h2>
+        <pre><code>@article{paul2025sage,
+  title   = {Point Cloud as a Foreign Language for Multi-modal Large Language Model},
+  author  = {Paul, Sneha and Patterson, Zachary and Bouguila, Nizar},
+  journal = {arXiv preprint},
+  year    = {2025}
+}</code></pre>
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <p>
+            Page template adapted from common academic project page conventions.
+            Source available on <a href="https://github.com/snehaputul/encoder-free-3d">GitHub</a>.
+        </p>
+    </div>
+</footer>
+
+</body>
+</html>
